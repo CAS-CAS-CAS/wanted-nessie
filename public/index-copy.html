@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+
+        <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/build/ol.js"></script>
+
+        <style>
+            .map {
+                height: 400px;
+                width: 100%;
+            }
+            </style>
+    </head>
+    <body>
+        <h2>My Map</h2>
+        <div id="map" class="map"></div>
+        
+        <div id="popup" class="olpopup">
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content"></div>
+        </div>
+
+        <img src="" id="pooch" />
+
+        <script src = "MapLoader.js" onerror="alert('error! loading')">
+        </script>
+
+        <script>
+
+            //constructMap();
+            //this image should just be added with html
+            catchDog().catch(error => {
+                console.error(error);
+            });
+
+            async function catchDog() {
+                const response = await fetch("pooch.jpg");
+                const blob = await response.blob();
+                document.getElementById('pooch').src = URL.createObjectURL(blob);
+            }
+        </script>
+
+        <img src="" id="pooch" />
+
+    </body>
+    
+</html>
