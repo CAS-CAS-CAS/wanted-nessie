@@ -1,4 +1,8 @@
-constructMap();
+
+function main(){
+    var map = constructMap();
+}
+
 console.log(window.location);
 
 function constructMap(){
@@ -31,7 +35,6 @@ var layer = new ol.layer.Vector({
 });
 map.addLayer(layer);
 
-
 //Popups
 var container = document.getElementById('popup');
 var content = document.getElementById('popup-content');
@@ -56,26 +59,34 @@ map.on('singleclick', function (event) {
     if (map.hasFeatureAtPixel(event.pixel) === true) {
         var coordinate = event.coordinate;
         content.innerHTML = '<b></b><br />I am a pup-up.';
-        //clickSound.play();
-        console.log(coordinate);
         overlay.setPosition(coordinate);
-        console.log("if-pin");
-        setPoint(event, map);
+        //console.log("if-pin");
+       // setPoint(event, map);
     } 
     else {
         var coordinate = event.coordinate;
-        //console.log(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326'));
         overlay.setPosition(undefined);
         closer.blur();
 
         //repeateable point setting
-        console.log("else-pin");
+        //console.log("else-pin");
         //console.log(event);
-        setPoint(event, map);
+        //setPoint(event, map);
+        var layer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: [
+                    new ol.Feature({
+                        geometry: new ol.geom.Point([-111.9234527085402, 33.418017665847174])
+                    })
+                ]
+            })
+        });
+        map.addLayer(layer);
     }});
+    return map;
 };
 
-
+/*
   function setPoint(event, map){
     //console.log(map);
     //console.log(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326'));
@@ -92,3 +103,5 @@ map.on('singleclick', function (event) {
     console.log(layer);
     map.addLayer(layer);
   }
+*/
+  main();
