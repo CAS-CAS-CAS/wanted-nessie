@@ -18,17 +18,19 @@ minZoom: 15,
 zoom: 17
     })
 });
-//marker
+//marker -- remove  eventually
+
 var layer = new ol.layer.Vector({
     source: new ol.source.Vector({
         features: [
             new ol.Feature({
-                geometry: new ol.geom.Point(ol.proj.fromLonLat(centerCoor))//[4.35247, 50.84673]))
+                geometry: new ol.geom.Point(ol.proj.fromLonLat(centerCoor))
             })
         ]
     })
 });
 map.addLayer(layer);
+
 
 //Popups
 var container = document.getElementById('popup');
@@ -62,75 +64,31 @@ map.on('singleclick', function (event) {
     } 
     else {
         var coordinate = event.coordinate;
-        console.log(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326'));
+        //console.log(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326'));
         overlay.setPosition(undefined);
         closer.blur();
 
         //repeateable point setting
         console.log("else-pin");
-        console.log(event);
+        //console.log(event);
         setPoint(event, map);
     }});
 };
 
 
-
-function setPin(event, map){
-    //  console.log(event)
-      var self = this;
-      var latLong = ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326');
-      var lat     = latLong[1];
-      var long    = latLong[0];
-      //console.log(this);
-     // self.params.options.mapClick({lat: lat, long:long});
-  
-      if(self.dinamicPinLayer !== undefined){
-          console.log("move")
-          self.iconGeometry.setCoordinates(event.coordinate);
-            //or create another pin  
-      } else {
-          self.iconGeometry = new ol.geom.Point(event.coordinate);
-          console.log(self.iconGeometry);
-  
-          var iconFeature = new ol.Feature({
-              geometry: self.iconGeometry,
-              name: 'Null Island',
-              population: 4000,
-              rainfall: 500
-          });
-          var iconStyle = new ol.style.Style({
-              image: new ol.style.Icon(({
-                  anchor: [0.5, 46],
-                  archorUnitsX: 'fraction',
-                  anchorUnitsY: 'pixels',
-                  size: [48,48],
-                  opacity: 1,
-                  src: 'star.png'
-              }))
-          });
-  
-          iconFeature.setStyle(iconStyle);
-  
-          var vectorSource = new ol.source.Vector({
-              features: [iconFeature]
-          });
-          self.dinamicPinLayer = new ol.layer.Vector({
-              source: vectorSource
-          });
-          map.addLayer(self.dinamicPinLayer);
-      } 
-  }
-
   function setPoint(event, map){
-    console.log("Setting point");
+    //console.log(map);
+    //console.log(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326'));
+    event.coordinate;
     var layer = new ol.layer.Vector({
         source: new ol.source.Vector({
             features: [
                 new ol.Feature({
-                    geometry: new ol.geom.Point(ol.proj.fromLonLat(event.coordinate, 'EPSG:3857', 'EPSG:4326'))
+                    geometry: new ol.geom.Point([-111.9234527085402, 33.418017665847174])
                 })
             ]
         })
     });
+    console.log(layer);
     map.addLayer(layer);
   }
