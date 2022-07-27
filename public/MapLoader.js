@@ -1,18 +1,18 @@
 
 function main(){
-    var map = constructMap();
-    var coord = [-111.9234527085402, 33.418017665847174];
-    
+    var map = constructMap();    
     map.on('click', function(event){
+        if (map.hasFeatureAtPixel(event.pixel) === false) {
         var layer = makePinLayer(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326'));
         map.addLayer(layer);
+        }
     })
     
 }
-//event.coordinate, 'EPSG:3857', 'EPSG:4326'
+//(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326') - convert a mouse click location to map coor[lon,lat]
 
 function constructMap(){
-    const centerCoor = [-111.9234527085402, 33.418017665847174];
+    const centerCoor = [-111.9234527085402, 33.418017665847174];//TODO - replace this with current location or last know location
     var map = new ol.Map({
         target: 'map',
         layers: [new ol.layer.Tile({source: new ol.source.OSM()})],
