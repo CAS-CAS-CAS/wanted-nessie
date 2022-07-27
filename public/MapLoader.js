@@ -4,12 +4,12 @@ function main(){
     var coord = [-111.9234527085402, 33.418017665847174];
     
     map.on('click', function(event){
-        var layer = makePinLayer(event.coordinate);
+        var layer = makePinLayer(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326'));
         map.addLayer(layer);
     })
     
 }
-
+//event.coordinate, 'EPSG:3857', 'EPSG:4326'
 
 function constructMap(){
     const centerCoor = [-111.9234527085402, 33.418017665847174];
