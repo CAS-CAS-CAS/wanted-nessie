@@ -5,7 +5,7 @@ function main(){
     console.log(dogData);
     
     var container = document.getElementById('popup');
-    var content = document.getElementById('popup-content');
+    //var content = document.getElementById('popup-content');
     var closer = document.getElementById('popup-closer');
 
     var map = constructMap();  
@@ -32,12 +32,14 @@ function main(){
         map.addLayer(layer);
         }
         else{
+
             var coordinate = event.coordinate;
-            catchDog().catch(error => {
-                console.error(error);
-            });
-            content.innerHTML = `<b></b><br/>${dogData.Name} <br>${dogData.Size}<br>${dogData["Last Seen"]}`;
             overlay.setPosition(coordinate);
+            fetchDog(dogData);
+
+            
+           // console.log(document.getElementById('doggo'));
+
 
         }
     })
@@ -47,11 +49,16 @@ function main(){
 }
 //(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326') - convert a mouse click location to map coor[lon,lat]
 
-async function catchDog() {
-    const response = await fetch("pooch.jpg");
+async function fetchDog(dogData) {
+    const response = await fetch("/assets/pooch.jpg");
     const blob = await response.blob();
-    document.getElementById('doggo').src = URL.createObjectURL(blob);
-}
+    document.getElementById('popup-content').innerHTML = `<b></b><br/>
+    <img src = "${URL.createObjectURL(blob)}" width = "60" height = "60" id = "doggo"><br>
+    ${dogData.Name} <br>${dogData.Size}<br>${dogData["Last Seen"]}`;
+    
+
+    //document.getElementById('doggo').src = URL.createObjectURL(blob);
+};
 
 function constructMap(){
     const centerCoor = [-111.9234527085402, 33.418017665847174];//TODO - replace this with current location or last know location
