@@ -30,27 +30,12 @@
         </div>
 
         <img src="" id="pooch" />
+        <script src = "fs.js">        </script>
 
-        <script src = "MapLoader.js" onerror="alert('error! loading')">
-        </script>
 
-        <script>
+        <script src = "MapLoader.js" onerror="alert('error! loading')"></script>
 
-            //constructMap();
-            //this image should just be added with html
-            catchDog().catch(error => {
-                console.error(error);
-            });
-
-            async function catchDog() {
-                const response = await fetch("/assets/pooch.jpg");
-                const blob = await response.blob();
-                document.getElementById('pooch').src = URL.createObjectURL(blob);
-            }
-        </script>
-
-        <img src="" id="pooch" />
-
+        <button id = 'dogSave'>Save</button><button>Load</button>
     </body>
     
 </html>
