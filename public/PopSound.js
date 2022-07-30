@@ -1,7 +1,7 @@
 var clickSound = new sound("pop.mp3");
 
 
-function sound(source){
+function playSound(sound){
     this.sound = document.createElement("audio");
     this.sound.source = source;
     this.sound.setAttribute("preload", "auto");

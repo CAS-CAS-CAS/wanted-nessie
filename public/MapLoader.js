@@ -1,5 +1,6 @@
+var saveState = false;
+
 function main(){
-    const saveState = false;
     const dogData = {'ID': Date.now(),'Name': "Nellie", 'Size' : "Medium", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
     , "Last Seen Desc" : 'Lounging by the pool', 
 'Pin  Location': []};
@@ -45,10 +46,10 @@ function main(){
            // console.log(document.getElementById('doggo'));
         }
     })
-    let saveButton = document.getElementById("dogSave");
+   /* var saveButton = document.getElementById('dogSave');
     saveButton.addEventListener('click', event => {
         saveDogData();
-    })
+    })*/
 
 
 }
@@ -64,11 +65,10 @@ async function fetchDog(dogData) {
 
     //document.getElementById('doggo').src = URL.createObjectURL(blob);
 };
-
+/*
 function saveDogData(){
-    
     if(saveState){
-        const fileWriter = new fileWriter("data/DogData.txt");
+        const fileWriter = new FileWriter("data/DogData.txt");
         fileWriter.open();
         fileWriter.writeFile(`${JSON.stringify(dogData)}\n`);
         fileWriter.close();
@@ -79,7 +79,7 @@ function saveDogData(){
         console.log("No new data");
     }
 }
-
+*/
 function constructMap(){
     const centerCoor = [-111.9234527085402, 33.418017665847174];//TODO - replace this with current location or last know location
     var map = new ol.Map({
