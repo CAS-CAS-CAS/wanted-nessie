@@ -2,9 +2,29 @@ var saveState = false;
 var dogData = {'ID': Date.now(),'Name': "Nellie", 'Size' : "Medium", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
 , "Last Seen Desc" : 'Lounging by the pool', 
 'Pin  Location': []};
+/*var clickSound = new Audio("assets/pop.mp3");
+clickSound.play();
+console.log(clickSound);
+*/
+function makeSound(audioPath){
+    var sound = document.createElement("audio");
+    sound.src = audioPath;
+    sound.setAttribute("preload", "auto");
+    sound.setAttribute("controls", "none");
+    //this.sound.setAttribute("volume", "1.1");
+    sound.style.display = "none";
+    document.body.append(sound);
+    /*
+    this.play = function() {
+        sound.play();
+        console.log("POP");
+    }*/
+    return(sound);
+
+}
 
 function main(){
-
+    var pop = makeSound("assets/pop.mp3");
     var json = JSON.stringify(dogData);
     console.log(json);    
     var container = document.getElementById('popup');
@@ -36,7 +56,9 @@ function main(){
             var layer = makePinLayer(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326'));
             map.addLayer(layer);
             saveState = true;
-            //console.log(dogData);
+            console.log(pop);
+            pop.play();
+
         }
         else{
 
@@ -72,10 +94,18 @@ function getDogData(){
     const dName = document.getElementById("dname").value;
     const dSize = document.getElementById("dsize").value;
     const dSeen = document.getElementById("dseen").value;
+    
+    if(dName != ""){
+        dogData['Name'] = dName;
+    }
 
-    dogData['Name'] = dName;
-    dogData['Size'] = dSize;
-    dogData['Last Seen Desc'] = dSeen;
+    if(dSize){
+        dogData['Size'] = dSize;
+    }
+
+    if(dSeen){
+        dogData['Last Seen Desc'] = dSeen;
+    }
 
 
 };
@@ -119,6 +149,7 @@ function makePinLayer(coords){
     });
     return layer;
 };
+
 
 main();
 //Popups

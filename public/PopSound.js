@@ -1,4 +1,4 @@
-var clickSound = new sound("pop.mp3");
+var clickSound = new Audio("assets/pop.mp3");
 
 
 function playSound(sound){
