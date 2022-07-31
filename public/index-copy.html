@@ -34,6 +34,14 @@
 
 
         <button id = 'dogSave'>Save</button><button onclick="playSound(assets/pop.mp3)">Load</button>
+            <br><label for="fname">Dog Name:</label><br>
+            <input type="text" id="dname" name="Dog name: "><br>
+            <label for="lname">Dog Size:</label><br>
+            <input type="text" id="dsize" name="Dog size: "><br>
+            <label for="lname">Last Seen:</label><br>
+            <input type="text" id="dseen" name="Last Seen: "><br>
+            <input type="submit" value="CLickMe" onclick="getDogData()">
+
         <script src = "MapLoader.js" onerror="alert('error! loading')"></script>
         <script src = "PopSound.js" onerror="alert('error! loading')"></script>
     </body>

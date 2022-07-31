@@ -1,9 +1,10 @@
 var saveState = false;
+var dogData = {'ID': Date.now(),'Name': "Nellie", 'Size' : "Medium", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
+, "Last Seen Desc" : 'Lounging by the pool', 
+'Pin  Location': []};
 
 function main(){
-    const dogData = {'ID': Date.now(),'Name': "Nellie", 'Size' : "Medium", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
-    , "Last Seen Desc" : 'Lounging by the pool', 
-'Pin  Location': []};
+
     var json = JSON.stringify(dogData);
     console.log(json);    
     var container = document.getElementById('popup');
@@ -64,6 +65,19 @@ async function fetchDog(dogData) {
     
 
     //document.getElementById('doggo').src = URL.createObjectURL(blob);
+};
+
+function getDogData(){
+
+    const dName = document.getElementById("dname").value;
+    const dSize = document.getElementById("dsize").value;
+    const dSeen = document.getElementById("dseen").value;
+
+    dogData['Name'] = dName;
+    dogData['Size'] = dSize;
+    dogData['Last Seen Desc'] = dSeen;
+
+
 };
 /*
 function saveDogData(){
