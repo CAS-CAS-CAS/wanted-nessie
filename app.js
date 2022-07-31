@@ -8,9 +8,10 @@ app.use(express.static('public'));
 /*
 app.get('/', (req, res) => {
     console.log("Ello Govna")
-})
-app.post('/', (req, res) => {
-    res.send('POST request to the homepage')
 })*/
+
+app.post('/api', (req, res) => {
+    console.log(req.body);
+});
 
 console.log("Last Line Ran")

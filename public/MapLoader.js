@@ -1,3 +1,5 @@
+
+
 var saveState = false;
 var dogData = {'ID': Date.now(),'Name': "Nellie", 'Size' : "Medium", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
 , "Last Seen Desc" : 'Lounging by the pool', 
@@ -56,8 +58,7 @@ function main(){
             var layer = makePinLayer(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326'));
             map.addLayer(layer);
             saveState = true;
-            console.log(pop);
-            pop.play();
+            pop.play(); //favicon error 404 here; investigate bug
 
         }
         else{
@@ -69,10 +70,18 @@ function main(){
            // console.log(document.getElementById('doggo'));
         }
     })
-   /* var saveButton = document.getElementById('dogSave');
+    let saveButton = document.getElementById('dogSave');
     saveButton.addEventListener('click', event => {
-        saveDogData();
-    })*/
+        getDogData(newDog);
+        const options = {
+            method: "POST",
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newDog)
+        };
+        fetch('/api',options)
+    })
 
 
 }
@@ -89,22 +98,22 @@ async function fetchDog(dogData) {
     //document.getElementById('doggo').src = URL.createObjectURL(blob);
 };
 
-function getDogData(){
+function getDogData(data){
 
-    const dName = document.getElementById("dname").value;
-    const dSize = document.getElementById("dsize").value;
+    data['Name'] = document.getElementById("dname").value;
+    data['Size'] = document.getElementById("dsize").value;
     const dSeen = document.getElementById("dseen").value;
     
-    if(dName != ""){
-        dogData['Name'] = dName;
+    if(data['Name'] != ""){
+        data['Name'] = dName;
     }
 
-    if(dSize){
-        dogData['Size'] = dSize;
+    if(data['Size']){
+        data['Size'] = dSize;
     }
 
-    if(dSeen){
-        dogData['Last Seen Desc'] = dSeen;
+    if(data['Last Seen Desc']){
+        data['Last Seen Desc'] = dSeen;
     }
 
 
