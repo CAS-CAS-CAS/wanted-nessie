@@ -1,7 +1,5 @@
-
-
-var saveState = false;
-var dogData = {'ID': Date.now(),'Name': "Nellie", 'Size' : "Medium", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
+var mode = 'SELECT';
+var dogData = {'ID': Date.now(),'Name': "Nellie", 'Breed' : "Boxer", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
 , "Last Seen Desc" : 'Lounging by the pool', 
 'Pin  Location': []};
 /*var clickSound = new Audio("assets/pop.mp3");
@@ -54,6 +52,11 @@ function main(){
         if (map.hasFeatureAtPixel(event.pixel) === false) {
             var pinData = [event.coordinate[0],event.coordinate[1]];
             //dogData['Pin Location'].push(pinData);
+            /*console.log(dogData['Last Seen']);
+            if(dogData['Last Seen'].length < 1){
+                console.log(dogData['Last Seen']);
+                dogData['Last Seen'].push(pinData);
+            }*/
             dogData['Pin  Location'].push(pinData);
             var layer = makePinLayer(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326'));
             map.addLayer(layer);
@@ -70,9 +73,12 @@ function main(){
            // console.log(document.getElementById('doggo'));
         }
     })
-    let saveButton = document.getElementById('dogSave');
+    let saveButton = document.getElementById('dogEx');
     saveButton.addEventListener('click', event => {
+        var newDog = {'ID': Date.now(), 'Name':'', 'Breed':'',"Last Seen":dogData["Last Seen"],'Last Seen Desc': '',"Pin Location": [dogData['Pin  Location']]};
+        console.log(newDog);
         getDogData(newDog);
+        
         const options = {
             method: "POST",
             headers:{
@@ -80,7 +86,8 @@ function main(){
             },
             body: JSON.stringify(newDog)
         };
-        fetch('/api',options)
+        console.log(JSON.stringify(newDog));
+        fetch('/api', options);
     })
 
 
@@ -92,7 +99,7 @@ async function fetchDog(dogData) {
     const blob = await response.blob();
     document.getElementById('popup-content').innerHTML = `<b></b><br/>
     <img src = "${URL.createObjectURL(blob)}" width = "60" height = "60" id = "doggo"><br>
-    ${dogData.Name} <br>${dogData.Size}<br>${dogData["Last Seen Desc"]}`;
+    ${dogData.Name} <br>${dogData.Breed}<br>${dogData["Last Seen Desc"]}`;
     
 
     //document.getElementById('doggo').src = URL.createObjectURL(blob);
@@ -101,38 +108,12 @@ async function fetchDog(dogData) {
 function getDogData(data){
 
     data['Name'] = document.getElementById("dname").value;
-    data['Size'] = document.getElementById("dsize").value;
-    const dSeen = document.getElementById("dseen").value;
-    
-    if(data['Name'] != ""){
-        data['Name'] = dName;
-    }
-
-    if(data['Size']){
-        data['Size'] = dSize;
-    }
-
-    if(data['Last Seen Desc']){
-        data['Last Seen Desc'] = dSeen;
-    }
-
+    data['Breed'] = document.getElementById("dbreed").value;
+    data['Last Seen Desc'] = document.getElementById("dseen").value;
+    console.log(data)
 
 };
-/*
-function saveDogData(){
-    if(saveState){
-        const fileWriter = new FileWriter("data/DogData.txt");
-        fileWriter.open();
-        fileWriter.writeFile(`${JSON.stringify(dogData)}\n`);
-        fileWriter.close();
-        //fs.writeFile(`${JSON.stringify(dogData)}\n`, 'data/DogData.txt',(err =>{console.error(err);}))
-        saveState = false;
-    }
-    else{
-        console.log("No new data");
-    }
-}
-*/
+
 function constructMap(){
     const centerCoor = [-111.9234527085402, 33.418017665847174];//TODO - replace this with current location or last know location
     var map = new ol.Map({
