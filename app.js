@@ -12,8 +12,9 @@ app.get('/', (req, res) => {
 })*/
 
 app.post('/api', (req, res) => {
-    console.log(JSON.stringify(req.body));
-    fs.writeFile('public/data/DogData.txt', JSON.stringify(req.body).concat("\n"), {flag: 'a'}, err => {})
+    console.log(req.body);
+    //must have something in the array
+    fs.writeFile('public/data/DogData.txt', ("\n").concat(JSON.stringify(req.body)), {flag: 'a'}, err => {})
     res.end();
 });
 
