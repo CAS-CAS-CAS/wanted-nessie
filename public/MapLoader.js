@@ -1,4 +1,4 @@
-
+//import QRCODE from {/scripts/QRCODE.min.js};
 //dogList
 var mode = 'SELECT';
 var dogList = [];
@@ -131,4 +131,5 @@ function makePinLayer(coords){
     });
     return layer;
 };
+
 main();
