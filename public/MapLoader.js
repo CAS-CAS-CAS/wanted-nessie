@@ -1,5 +1,14 @@
-//import QRCODE from {/scripts/QRCODE.min.js};
-//dogList
+//import {QRCode}  from "./scripts/QRCODE.min.js";
+/*import QRCode from 'qrcodejs';  //dogList
+var qrcode = new QRCode("test", {
+    text: "http://jindo.dev.naver.com/collie",
+    width: 128,
+    height: 128,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+});
+*/
 var mode = 'SELECT';
 var dogList = [];
 var dogData = {'ID': Date.now(),'Name': "Nellie", 'Breed' : "Boxer", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
@@ -37,7 +46,20 @@ function main(){
         }
     });
     map.addOverlay(overlay);
-    
+    ////
+    /*
+    var GeoMap = new ga.Map({
+        view: new ol.View({
+          center: [600000, 200000]
+        }),
+        layers: [
+          ga.layer.create('ch.swisstopo.pixelkarte-farbe')
+        ],
+        target: 'GeoMap'
+      });
+      GeoMap.geocode("Arbys");
+      */
+    /////
     closer.onclick = function(){
         overlay.setPosition(undefined);
         closer.blur();
