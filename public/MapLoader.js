@@ -1,14 +1,7 @@
 //import {QRCode}  from "./scripts/QRCODE.min.js";
-/*import QRCode from 'qrcodejs';  //dogList
-var qrcode = new QRCode("test", {
-    text: "http://jindo.dev.naver.com/collie",
-    width: 128,
-    height: 128,
-    colorDark : "#000000",
-    colorLight : "#ffffff",
-    correctLevel : QRCode.CorrectLevel.H
-});
-*/
+//import QRCode from 'qrcodejs';  //dogList
+
+
 var mode = 'SELECT';
 var dogList = [];
 var dogData = {'ID': Date.now(),'Name': "Nellie", 'Breed' : "Boxer", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
