@@ -8,9 +8,11 @@ OVERLAYCLICKTHRU
 CONTROL BUTTONS:
     -multidog in prog - add last seen marker(click select or address) address to lon lat GEOMAPPNIG
     - uplaod  picture to server
-Generate QR codes !!
+Generate QR codes !! for a particular dog
 
 MORE TODOS:
 NEW MARKER TYPE
 DATABASE
 SPIN UP PAGES FOR ARBITRARY DOG
+
+MIGRATE TO WEBPACK?
