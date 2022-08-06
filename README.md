@@ -6,6 +6,11 @@ AUDIO check
 DATA FORM check
 OVERLAYCLICKTHRU
 CONTROL BUTTONS:
-    -multidog in prog - add last seen marker(click select or address) address to lon lat
+    -multidog in prog - add last seen marker(click select or address) address to lon lat GEOMAPPNIG
     - uplaod  picture to server
-Generate QR codes next
+Generate QR codes !!
+
+MORE TODOS:
+NEW MARKER TYPE
+DATABASE
+SPIN UP PAGES FOR ARBITRARY DOG

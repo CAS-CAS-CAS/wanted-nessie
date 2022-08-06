@@ -24,6 +24,7 @@ function makeSound(audioPath){
 }
 
 function main(){
+    
     var pop = makeSound("assets/pop.mp3");
     var json = JSON.stringify(dogData);   
     var container = document.getElementById('popup');
@@ -135,6 +136,7 @@ function constructMap(){
 };
 
 function makePinLayer(coords){
+    var stylePoints = {fillColor: "#ff000000"};
     var layer = new ol.layer.Vector({
         source: new ol.source.Vector({
             features: [
@@ -142,8 +144,10 @@ function makePinLayer(coords){
                     geometry: new ol.geom.Point(ol.proj.fromLonLat(coords))
                 })
             ]
-        })
+        }),
+        style: stylePoints
     });
+    console.log(stylePoints);
     return layer;
 };
 
