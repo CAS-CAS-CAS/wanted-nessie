@@ -136,18 +136,35 @@ function constructMap(){
 };
 
 function makePinLayer(coords){
-    var stylePoints = {fillColor: "#ff000000"};
+    var stylePoints = {fillColor: "#fff00000"};
     var layer = new ol.layer.Vector({
         source: new ol.source.Vector({
             features: [
                 new ol.Feature({
                     geometry: new ol.geom.Point(ol.proj.fromLonLat(coords))
-                })
-            ]
-        }),
-        style: stylePoints
+                }),
+            ],
+            style: stylePoints
+        })
     });
-    console.log(stylePoints);
+
+/*
+var stylePoints = {fillColor: "#fff00000", strokeColor: "#0000FF0F"};
+    features =  [
+            new ol.Feature({
+                geometry: new ol.geom.Point(ol.proj.fromLonLat(coords))
+            })
+        ]
+        //style: stylePoints
+    
+
+
+
+    source =  new ol.source.Vector(featu);
+    
+*/
+
+    console.log(layer);
     return layer;
 };
 
