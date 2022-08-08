@@ -22,13 +22,13 @@
     </head>
     <body>
         <h2><a href="index.html">My Map</a></h2>
-
+        <div id = "mode">Mode: SELECT</div>
         <div id="map" class="map"></div>
         <div id="qrcode"></div>
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
         new QRCode(document.getElementById("qrcode"), "https://10fastfingers.com/typing-test/english");
         </script>
-
+        -->
         <div id="popup" class="olpopup">
             <a href="#" id="popup-closer" class="ol-popup-closer"></a>
             <div id="popup-content" class="unselectable"></div>
@@ -40,7 +40,11 @@
 
 
 
-        <button>Select</button><button id = "reqDogData" onclick="requestDogData()">Load</button><button id = 'dogEx'>Export</button>
+        <button>Select</button>
+        <button id = 'reqDogData' onclick="requestDogData()">Load</button>
+        <button id = 'dogEx'>Export</button>
+        <button id = 'modeTog' onclick="toggleMode()">Mode</button>
+
         <br><label for="fname">Dog Name:</label><br>
         <input type="text" id="dname" name="Dog name: "><br>
         <label for="lname">Dog Breed:</label><br>

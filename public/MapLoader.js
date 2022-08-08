@@ -1,8 +1,12 @@
 //import {QRCode}  from "./scripts/QRCODE.min.js";
 //import QRCode from 'qrcodejs';  //dogList
 
-
+const modes  = {
+    Select: "SELECT",
+    Seen: "SEEN"
+}
 var mode = 'SELECT';
+
 var dogList = [];
 var dogData = {'ID': Date.now(),'Name': "Nellie", 'Breed' : "Boxer", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
 , "Last Seen Desc" : 'Lounging by the pool', 
@@ -148,6 +152,7 @@ function makePinLayer(coords){
         })
     });
 
+ 
 /*
 var stylePoints = {fillColor: "#fff00000", strokeColor: "#0000FF0F"};
     features =  [
@@ -167,5 +172,17 @@ var stylePoints = {fillColor: "#fff00000", strokeColor: "#0000FF0F"};
     console.log(layer);
     return layer;
 };
+
+function toggleMode(){
+    if(mode == modes.Select){
+        mode = modes.Seen;
+        document.getElementById('mode').innerHTML = "Mode: SEEN";
+    }
+    else{
+        mode = modes.Select;
+        document.getElementById('mode').innerHTML = "Mode: SELECT";
+
+    }
+    };
 
 main();
