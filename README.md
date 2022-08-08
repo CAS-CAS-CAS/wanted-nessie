@@ -16,3 +16,5 @@ DATABASE 2
 SPIN UP PAGES FOR ARBITRARY DOG 3
 
 MIGRATE TO WEBPACK?
+
+Consider splitting modes into different click events

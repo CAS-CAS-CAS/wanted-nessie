@@ -65,6 +65,13 @@ function main(){
     };
 
     map.on('click', function(event){
+        if(mode=="SEEN"){
+            dogData['Last Seen'] = [event.coordinate[0],event.coordinate[1]]
+            console.log(dogData['Last Seen'])
+        }
+        else if(mode=="SELECT"){
+
+        
         if (map.hasFeatureAtPixel(event.pixel) === false) {
             var pinData = [event.coordinate[0],event.coordinate[1]];
             dogData['Pin  Location'].push(pinData);
@@ -78,7 +85,7 @@ function main(){
             var coordinate = event.coordinate;
             overlay.setPosition(coordinate);
             fetchDog(dogData);
-        }
+        }}
     })
     //TODO: mode listener
     //TODO: load listener
@@ -181,7 +188,6 @@ function toggleMode(){
     else{
         mode = modes.Select;
         document.getElementById('mode').innerHTML = "Mode: SELECT";
-
     }
     };
 
