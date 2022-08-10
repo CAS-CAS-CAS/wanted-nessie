@@ -1,9 +1,21 @@
 const express = require('express');
+const Datastore = require('nedb');
 const fs = require('fs');
+
+
 const app = express();
 app.listen(3000, () => console.log("App Callback"));
 app.use(express.static('public'));
 app.use(express.json({limit: '1mb'}));
+
+
+
+const database = new Datastore('dawgs.db');
+database.loadDatabase();
+
+
+
+
 //app.use(express.json())
 
 /*
