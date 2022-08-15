@@ -18,3 +18,15 @@ SPIN UP PAGES FOR ARBITRARY DOG 3
 MIGRATE TO WEBPACK?
 
 Consider splitting modes into different click events
+
+
+
+.-------------.
+/|||||||||||||\
+||||R.I.P||||||
+||||Nellie|||||
+|||||<-3|||||||
+||13 AUG 2022||
+|||||||||||||||
+________________
+~`~`~`~`~`~`~`~`~
