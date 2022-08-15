@@ -12,10 +12,6 @@ var dogData = {'ID': Date.now(),'Name': "Nessie", 'Breed' : "Boxer", "Last Seen"
 , "Last Seen Desc" : 'Lounging by the pool', 
 'Pin  Location': []};
 
-/*var clickSound = new Audio("assets/pop.mp3");
-clickSound.play();
-console.log(clickSound);
-*/
 function makeSound(audioPath){
     var sound = document.createElement("audio");
     sound.src = audioPath;
@@ -87,9 +83,7 @@ function main(){
             fetchDog(dogData);
         }}
     })
-    //TODO: mode listener
-    //TODO: load listener
-    //setup button listeners
+
     let saveButton = document.getElementById('dogEx');
     saveButton.addEventListener('click', event => {
         var newDog = {'ID': Date.now(), 'Name':'', 'Breed':'','Last Seen':dogData['Last Seen'],'Last Seen Desc': '','Pin Location': [dogData['Pin  Location']]};
@@ -158,25 +152,7 @@ function makePinLayer(coords){
             style: stylePoints
         })
     });
-
- 
-/*
-var stylePoints = {fillColor: "#fff00000", strokeColor: "#0000FF0F"};
-    features =  [
-            new ol.Feature({
-                geometry: new ol.geom.Point(ol.proj.fromLonLat(coords))
-            })
-        ]
-        //style: stylePoints
-    
-
-
-
-    source =  new ol.source.Vector(featu);
-    
-*/
-
-    console.log(layer);
+    //console.log(layer);
     return layer;
 };
 
