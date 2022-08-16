@@ -1,6 +1,6 @@
 //import {QRCode}  from "./scripts/QRCODE.min.js";
 //import QRCode from 'qrcodejs';  //dogList
-
+//check out dataFlag in index.html
 const modes  = {
     Select: "SELECT",
     Seen: "SEEN"
