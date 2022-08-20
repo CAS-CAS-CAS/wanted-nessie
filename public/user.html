@@ -7,6 +7,14 @@
     </head>
     <body>
         </body><h2>Hey there you're a rockstar!</h2>
+        <script>
+            getData();
+            async function getData(){
+                const resp = await fetch('/api');
+                const data = await resp.json();
+                console.log(data);
+            }
+        </script>
     </body>
     
 </html>

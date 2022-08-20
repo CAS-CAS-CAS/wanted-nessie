@@ -18,15 +18,22 @@ database.loadDatabase();
 
 //app.use(express.json())
 
-/*
-app.get('/', (req, res) => {
-    console.log("Ello Govna")
-})*/
+
+app.get('/api', (req, res) => {
+    database.find({}, (err,data) =>{
+        if(err){
+            res.end();
+            return; 
+        }
+        res.json(data);
+    })
+})
 
 app.post('/api', (req, res) => {
     console.log(req.body);
     //must have something in the array
     fs.writeFile('public/data/DogData.txt', ("\n").concat(JSON.stringify(req.body)), {flag: 'a'}, err => {})
+    database.insert(req.body);
     res.end();
 });
 
