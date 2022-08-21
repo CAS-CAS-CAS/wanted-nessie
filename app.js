@@ -27,6 +27,7 @@ app.get('/api', (req, res) => {
         }
         res.json(data);
     })
+    console.log(req.body);
 })
 
 app.post('/api', (req, res) => {
