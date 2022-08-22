@@ -33,7 +33,7 @@ app.get('/api', (req, res) => {
 app.post('/api', (req, res) => {
     console.log(req.body);
     //must have something in the array
-    fs.writeFile('public/data/DogData.txt', ("\n").concat(JSON.stringify(req.body)), {flag: 'a'}, err => {})
+    //fs.writeFile('public/data/DogData.txt', ("\n").concat(JSON.stringify(req.body)), {flag: 'a'}, err => {})
     database.insert(req.body);
     res.end();
 });
