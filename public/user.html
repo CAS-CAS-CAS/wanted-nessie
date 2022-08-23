@@ -7,15 +7,23 @@
     </head>
     <body>
         </body><h2>Hey there you're a rockstar!</h2>
-        <script>
-            getData();
-            async function getData(){
-                const resp = await fetch('/api');
-                const data = await resp.json();
-                console.log(data);
-            }
-        </script>
         <div id="username">default user</div>
+        <div id="breed">golden retriever</div>
+        <div id="lastSeen">default last seen</div>
+
     </body>
-    
+    <script>
+        getData();
+        async function getData(){
+            const resp = await fetch('/api');
+            const data = await resp.json();
+            console.log(data[0]);
+
+            console.log(window);
+            document.getElementById("username").innerText = `${data[0].Name}`;
+            document.getElementById("breed").innerText = `${data[0].Breed}`;
+            document.getElementById("lastSeen").innerText = `${data[0]['Last Seen']}`;
+
+        }
+    </script>
 </html>

@@ -6,8 +6,16 @@
         
     </head>
     <body>
-        <p><a href="user.html">Hey there Super Star</a></p>
+        <p><a href="user.html" id="redirect">Hey there Super Star</a></p>
         <iframe src = "index-copy.html" title="Sponge", height="600", width="1000"></iframe>
     </body>
-    
+    <script>
+        getData();
+        async function getData(){
+            const resp = await fetch('/api');
+            const data = await resp.json();
+            document.getElementById("redirect").href = new URL("user.html", data[0].ID)
+
+        }
+    </script>
 </html>
