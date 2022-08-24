@@ -14,8 +14,8 @@
         async function getData(){
             const resp = await fetch('/api');
             const data = await resp.json();
-            document.getElementById("redirect").href = new URL("user.html", data[0].ID)
-
+            document.getElementById("redirect").href = new URL(`user.html?= ${data[0].ID}`, "http://localhost:3000")
+            console.log(new URL(`user.html?${data[0].ID}`, "http://localhost:3000"));
         }
     </script>
 </html>
