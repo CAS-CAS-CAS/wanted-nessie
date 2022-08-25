@@ -7,15 +7,26 @@
     </head>
     <body>
         <p><a href="user.html" id="redirect">Hey there Super Star</a></p>
-        <iframe src = "index-copy.html" title="Sponge", height="600", width="1000"></iframe>
+        <iframe id="internal" src = "index-copy.html" title="Sponge", height="600", width="1000"></iframe>
     </body>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     <script>
+        let userUrl;
         getData();
         async function getData(){
             const resp = await fetch('/api');
             const data = await resp.json();
-            document.getElementById("redirect").href = new URL(`user.html?= ${data[0].ID}`, "http://localhost:3000")
+            userUrl = new URL(`user.html?= ${data[0].ID}`, "http://localhost:3000");
+            document.getElementById("redirect").href = userUrl;
             console.log(new URL(`user.html?${data[0].ID}`, "http://localhost:3000"));
         }
+        //new QRCode(document.getElementById('qrcode').contentWindow.document.body, "https://10fastfingers.com/typing-test/english");
+        var iframe = document.getElementById('internal');
+        iframe.onload = () =>{
+            let qrcode = iframe.contentDocument.getElementById("qrcode");
+            console.log(userUrl);
+            new QRCode(qrcode, userUrl.href);
+        }
+
     </script>
 </html>
