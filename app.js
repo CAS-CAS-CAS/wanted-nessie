@@ -13,9 +13,6 @@ app.use(express.json({limit: '1mb'}));
 const database = new Datastore('dawgs.db');
 database.loadDatabase();
 
-
-
-
 //app.use(express.json())
 
 
@@ -30,8 +27,18 @@ app.get('/api', (req, res) => {
     console.log(req.body);
 })
 
+app.get('/user', (req, res) => {
+    let targetID = JSON.stringify(req.headers.referer).split("?=")[1].slice(0,-1);
+    database.find({Name:"cas"}, (err,data) =>{
+        if(err){
+            res.end();
+            return; 
+        }
+        res.json(data);
+    })
+})
+
 app.post('/api', (req, res) => {
-    console.log(req.body);
     //must have something in the array
     //fs.writeFile('public/data/DogData.txt', ("\n").concat(JSON.stringify(req.body)), {flag: 'a'}, err => {})
     database.insert(req.body);

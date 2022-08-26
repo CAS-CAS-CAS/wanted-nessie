@@ -20,15 +20,13 @@
     <script>
         getData();
         async function getData(){
-
-            const resp = await fetch('/api');
+            const resp = await fetch('/user');
             const data = await resp.json();
-
-            console.log(window.location.search);
+            console.log(data);
+            //console.log(window.location.search);
             document.getElementById("username").innerText = `${data[0].Name}`;
             document.getElementById("breed").innerText = `${data[0].Breed}`;
             document.getElementById("lastSeen").innerText = `${data[0]['Last Seen']}`;
-
         }
     </script>
 </html>
