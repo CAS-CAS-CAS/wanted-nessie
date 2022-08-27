@@ -86,7 +86,7 @@ function main(){
 
     let saveButton = document.getElementById('dogEx');
     saveButton.addEventListener('click', event => {
-        var newDog = {'ID': Date.now(), 'Name':'', 'Breed':'','Last Seen':dogData['Last Seen'],'Last Seen Desc': '','Pin Location': [dogData['Pin  Location']]};
+        var newDog = {'ID': `${Date.now()}`, 'Name':'', 'Breed':'','Last Seen':dogData['Last Seen'],'Last Seen Desc': '','Pin Location': [dogData['Pin  Location']]};
         getDogData(newDog);
     
         const options = {

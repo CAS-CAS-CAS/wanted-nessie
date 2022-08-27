@@ -24,6 +24,8 @@
             const data = await resp.json();
             console.log(data);
             //console.log(window.location.search);
+
+            //LOOKUP: can i get data returned as an object instead of an array?
             document.getElementById("username").innerText = `${data[0].Name}`;
             document.getElementById("breed").innerText = `${data[0].Breed}`;
             document.getElementById("lastSeen").innerText = `${data[0]['Last Seen']}`;

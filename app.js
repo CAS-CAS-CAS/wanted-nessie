@@ -29,7 +29,7 @@ app.get('/api', (req, res) => {
 
 app.get('/user', (req, res) => {
     let targetID = JSON.stringify(req.headers.referer).split("?=")[1].slice(0,-1);
-    database.find({Name:"cas"}, (err,data) =>{
+    database.find({ID: targetID}, (err,data) =>{
         if(err){
             res.end();
             return; 
