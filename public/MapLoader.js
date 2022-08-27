@@ -8,6 +8,8 @@ const modes  = {
 var mode = 'SELECT';
 
 var dogList = [];
+
+//TODO:change datenow to string
 var dogData = {'ID': Date.now(),'Name': "Nessie", 'Breed' : "Boxer", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
 , "Last Seen Desc" : 'Lounging by the pool', 
 'Pin  Location': []};
