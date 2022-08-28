@@ -1,38 +1,20 @@
-//import {QRCode}  from "./scripts/QRCODE.min.js";
-//import QRCode from 'qrcodejs';  //dogList
 //check out dataFlag in index.html
 const modes  = {
     Select: "SELECT",
     Seen: "SEEN"
 }
 var mode = 'SELECT';
-
 var dogList = [];
 
-//TODO:change datenow to string
-var dogData = {'ID': Date.now(),'Name': "Nessie", 'Breed' : "Boxer", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
+var dogData = {'ID': `${Date.now()}`,'Name': "Nessie", 'Breed' : "Boxer", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
 , "Last Seen Desc" : 'Lounging by the pool', 
 'Pin  Location': []};
 
-function makeSound(audioPath){
-    var sound = document.createElement("audio");
-    sound.src = audioPath;
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    //this.sound.setAttribute("volume", "1.1");
-    sound.style.display = "none";
-    document.body.append(sound);
-    return(sound);
-}
-
-function main(){
-    
-    var pop = makeSound("assets/pop.mp3");
-    var json = JSON.stringify(dogData);   
+function main(){    
     var container = document.getElementById('popup');
     //var content = document.getElementById('popup-content');
     var closer = document.getElementById('popup-closer');
-    var map = constructMap();  
+    let map = constructMap();  
     
     var overlay = new ol.Overlay({
         element: container,
@@ -68,20 +50,18 @@ function main(){
             console.log(dogData['Last Seen'])
         }
         else if(mode=="SELECT"){
-
-        
         if (map.hasFeatureAtPixel(event.pixel) === false) {
-            var pinData = [event.coordinate[0],event.coordinate[1]];
-            dogData['Pin  Location'].push(pinData);
-            var layer = makePinLayer(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326'));
-            map.addLayer(layer);
+            dogData['Pin  Location'].push([event.coordinate[0],event.coordinate[1]]);
+            map.addLayer(makePinLayer(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326')));
             saveState = true;
+            
+            let pop = makeSound("assets/pop.mp3");
             pop.play(); //favicon error 404 here; investigate bug
 
         }
         else{
-            var coordinate = event.coordinate;
-            overlay.setPosition(coordinate);
+           // var coordinate = event.coordinate;
+            overlay.setPosition(event.coordinate);
             fetchDog(dogData);
         }}
     })
@@ -104,6 +84,17 @@ function main(){
 
 }
 //(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326') - convert a mouse click location to map coor[lon,lat]
+
+function makeSound(audioPath){
+    var sound = document.createElement("audio");
+    sound.src = audioPath;
+    sound.setAttribute("preload", "auto");
+    sound.setAttribute("controls", "none");
+    //this.sound.setAttribute("volume", "1.1");
+    sound.style.display = "none";
+    document.body.append(sound);
+    return(sound);
+}
 
 async function requestDogData(){
     const response = await fetch("/data/DogData.txt");
@@ -154,7 +145,6 @@ function makePinLayer(coords){
             style: stylePoints
         })
     });
-    //console.log(layer);
     return layer;
 };
 

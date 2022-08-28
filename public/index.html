@@ -11,23 +11,20 @@
     </body>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     <script>
+        //NOOB:return data from getData into userUrl
         let userUrl;
         getData();
-        async function getData(){
-            const resp = await fetch('/api');
-            const data = await resp.json();
-
-            userUrl = new URL(`user.html?=${data[data.length-1].ID}`, "http://localhost:3000");
-            document.getElementById("redirect").href = userUrl;
-            //console.log(new URL(`user.html?${data[1].ID}`, "http://localhost:3000"));
-        }
-        //new QRCode(document.getElementById('qrcode').contentWindow.document.body, "https://10fastfingers.com/typing-test/english");
         var iframe = document.getElementById('internal');
         iframe.onload = () =>{
             let qrcode = iframe.contentDocument.getElementById("qrcode");
-            console.log(userUrl);
             new QRCode(qrcode, userUrl.href);
         }
 
+        async function getData(){
+            const resp = await fetch('/api');
+            const data = await resp.json();
+            userUrl = new URL(`user.html?=${data[data.length-1].ID}`, "http://localhost:3000");
+            document.getElementById("redirect").href = userUrl;
+        }
     </script>
 </html>
