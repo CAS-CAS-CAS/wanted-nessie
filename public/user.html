@@ -12,6 +12,7 @@
         <a href="http://localhost:3000/">Send me back!</a>
         </div>
         <div id="username">default user</div>
+        <div id="gender">mii</div>
         <div id="breed">golden retriever</div>
         <div id="lastSeen">default last seen</div>
 
@@ -27,6 +28,7 @@
 
             //LOOKUP: can i get data returned as an object instead of an array?
             document.getElementById("username").innerText = `${data[0].Name}`;
+            document.getElementById("breed").innerText = `${data[0].Gender}`;//expand gender info: data - > expansion? or compression?
             document.getElementById("breed").innerText = `${data[0].Breed}`;
             document.getElementById("lastSeen").innerText = `${data[0]['Last Seen']}`;
         }

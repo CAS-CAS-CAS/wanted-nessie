@@ -53,7 +53,6 @@ function main(){
         if (map.hasFeatureAtPixel(event.pixel) === false) {
             dogData['Pin  Location'].push([event.coordinate[0],event.coordinate[1]]);
             map.addLayer(makePinLayer(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326')));
-            saveState = true;
             
             let pop = makeSound("assets/pop.mp3");
             pop.play(); //favicon error 404 here; investigate bug
@@ -68,7 +67,9 @@ function main(){
 
     let saveButton = document.getElementById('dogEx');
     saveButton.addEventListener('click', event => {
-        var newDog = {'ID': `${Date.now()}`, 'Name':'', 'Breed':'','Last Seen':dogData['Last Seen'],'Last Seen Desc': '','Pin Location': [dogData['Pin  Location']]};
+        if(document.getElementById('dataFlag').checked){
+        
+        let newDog = {'ID': `${Date.now()}`, 'Name':'', 'Gender':'', 'Breed':'','Last Seen':dogData['Last Seen'],'Last Seen Desc': '','Pin Location': [dogData['Pin  Location']]};
         getDogData(newDog);
     
         const options = {
@@ -79,6 +80,7 @@ function main(){
             body: JSON.stringify(newDog)
         };
         fetch('/api', options);
+    }
     })
 
 
@@ -116,6 +118,7 @@ async function fetchDog(dogData) {
 
 function getDogData(data){
     data['Name'] = document.getElementById("dname").value;
+    document.getElementsByName('gender').forEach(n=>{if(n.checked){data['Gender'] = n.value}});
     data['Breed'] = document.getElementById("dbreed").value;
     data['Last Seen Desc'] = document.getElementById("dseen").value;
 };
