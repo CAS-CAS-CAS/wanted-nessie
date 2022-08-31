@@ -29,7 +29,7 @@
     <script>
         getData();
         async function getData(){
-            const genderz = {"f":"♂","m": "♀","np": "⛔️🐾"};
+            const genderz = {"m":"♂","f": "♀","np": "⛔️🐾"};
             const resp = await fetch('/user');
             const data = await resp.json();
             console.log(data);
