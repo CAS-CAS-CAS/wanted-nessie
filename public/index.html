@@ -15,7 +15,7 @@
         let userUrl;
         getData();
         var iframe = document.getElementById('internal');
-        iframe.onload = () =>{
+        iframe.onload = () => {
             let qrcode = iframe.contentDocument.getElementById("qrcode");
             new QRCode(qrcode, userUrl.href);
         }

@@ -7,7 +7,10 @@ app.use(express.static('public'));
 
 app.use(express.json({limit: '1mb'})); 
 
-const database = new Datastore('dawgs.db');
+const dogsDB = new Datastore('dawgs.db');
+database.loadDatabase();
+
+const pinsDB = new Datastore('pins.db');
 database.loadDatabase();
 
 app.get('/api', (req, res) => {
@@ -19,6 +22,8 @@ app.get('/api', (req, res) => {
         res.json(data);
     })
 })
+
+app.get()
 
 app.get('/user', (req, res) => {
     let targetID = JSON.stringify(req.headers.referer).split("?=")[1].slice(0,-1);
