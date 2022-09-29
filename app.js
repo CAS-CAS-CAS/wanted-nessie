@@ -8,13 +8,13 @@ app.use(express.static('public'));
 app.use(express.json({limit: '1mb'})); 
 
 const dogsDB = new Datastore('dawgs.db');
-database.loadDatabase();
+dogsDB.loadDatabase();
 
 const pinsDB = new Datastore('pins.db');
-database.loadDatabase();
+pinsDB.loadDatabase();
 
 app.get('/api', (req, res) => {
-    database.find({}, (err,data) =>{
+    dogsDB.find({}, (err,data) =>{
         if(err){
             res.end();
             return; 
@@ -23,11 +23,13 @@ app.get('/api', (req, res) => {
     })
 })
 
-app.get()
+app.post('/pins', (req, res) => {
+    pinsDB.insert(req.body);
+})
 
 app.get('/user', (req, res) => {
     let targetID = JSON.stringify(req.headers.referer).split("?=")[1].slice(0,-1);
-    database.find({ID: targetID}, (err,data) =>{
+    dogsDB.find({ID: targetID}, (err,data) =>{
         if(err){
             res.end();
             return; 
@@ -37,7 +39,7 @@ app.get('/user', (req, res) => {
 })
 
 app.post('/api', (req, res) => {
-    database.insert(req.body);
+    dogsDB.insert(req.body);
     res.json(Date.now());
 });
 
