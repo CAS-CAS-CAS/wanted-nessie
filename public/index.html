@@ -6,7 +6,14 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <p><a href="user.html" id="redirect">Hey there Super Star</a></p>
+        <ul>
+            <li><a href="pet.html" id="redirect">Pet Viewer</a></li>
+            <li><a href="news.asp">News</a></li>
+            <li><a href="contact.asp">Contact</a></li>
+            <li><a href="about.asp">About</a></li>
+        </ul>
+        
+        
         <iframe id="internal" src = "index-copy.html" title="Sponge", height="600", width="1000"></iframe>
     </body>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
@@ -23,7 +30,7 @@
         async function getData(){
             const resp = await fetch('/api');
             const data = await resp.json();
-            userUrl = new URL(`user.html?=${data[data.length-1].ID}`, "http://localhost:3000");
+            userUrl = new URL(`pet.html?=${data[data.length-1].ID}`, "http://localhost:3000");
             document.getElementById("redirect").href = userUrl;
         }
     </script>

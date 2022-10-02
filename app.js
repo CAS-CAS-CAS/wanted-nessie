@@ -27,7 +27,7 @@ app.post('/pins', (req, res) => {
     pinsDB.insert(req.body);
 })
 
-app.get('/user', (req, res) => {
+app.get('/pet', (req, res) => {
     let targetID = JSON.stringify(req.headers.referer).split("?=")[1].slice(0,-1);
     dogsDB.find({ID: targetID}, (err,data) =>{
         if(err){

@@ -1,45 +1,12 @@
 <!DOCTYPE html>
-<html lang="eng">
-    <head>
-        <meta charset="UTF-8">
-        <title> User Man </title>
-        
-    </head>
-    <body>
-        </body>
-        <div>
-        <h2>Hey there you're a rockstar!</h2>
-        <a href="http://localhost:3000/">Send me back!</a>
-        </div>
-        <table>
-        <tr>
-            <td>
-        <div id="username">default user</div>
-        </td>
-        <td>
-        <div id="gender">mii</div>
-        </td>
-        </tr>
-        </table>
-        <div id="breed">golden retriever</div>
-        <div id="lastSeen">default last seen</div>
-
-    </body>
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
-    <script>
-        getData();
-        async function getData(){
-            const genderz = {"m":"♂","f": "♀","np": "⛔️🐾"};
-            const resp = await fetch('/user');
-            const data = await resp.json();
-            console.log(data);
-            //console.log(window.location.search);
-
-            //LOOKUP: can i get data returned as an object instead of an array?
-            document.getElementById("username").innerText = `${data[0].Name}`;
-            document.getElementById("gender").innerText = `${genderz[data[0].Gender]}`;//expand gender info: data - > expansion? or compression?
-            document.getElementById("breed").innerText = `${data[0].Breed}`;
-            document.getElementById("lastSeen").innerText = `${data[0]['Last Seen']}`;
-        }
-    </script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+</head>
+<body>
+    ADMIN
+</body>
 </html>
