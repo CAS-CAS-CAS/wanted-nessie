@@ -1,7 +1,8 @@
 //check out dataFlag in index.html
 const modes  = {
     Select: "SELECT",
-    Seen: "SEEN"
+    Seen: "SEEN",
+    Listing: "LISTING"
 }
 var mode = 'SELECT';
 var dogList = [];
@@ -45,24 +46,33 @@ function main(){
     };
 
     map.on('click', function(event){
-        if(mode=="SEEN"){
+        if(mode==="SEEN"){
             dogData['Last Seen'] = [event.coordinate[0],event.coordinate[1]]
             console.log(dogData['Last Seen'])
         }
-        else if(mode=="SELECT"){
-        if (map.hasFeatureAtPixel(event.pixel) === false) {
-            dogData['Pin  Location'].push([event.coordinate[0],event.coordinate[1]]);
-            map.addLayer(makePinLayer(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326')));
+        else if(mode==="SELECT"){
             
-            let pop = makeSound("assets/pop.mp3");
-            pop.play(); //favicon error 404 here; investigate bug
+            if (map.hasFeatureAtPixel(event.pixel) === false) {
+                dogData['Pin  Location'].push([event.coordinate[0],event.coordinate[1]]);
+                map.addLayer(makePinLayer(ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326')));
+            
+                let pop = makeSound("assets/pop.mp3");
+                pop.play(); //favicon error 404 here; investigate bug
 
+            }
+            
+            else {
+                // var coordinate = event.coordinate;
+                overlay.setPosition(event.coordinate);
+                fetchDog(dogData);
+            }
+        }
+        else if(mode==="LISTING"){
+            let pinData = getPinData();
         }
         else{
-           // var coordinate = event.coordinate;
-            overlay.setPosition(event.coordinate);
-            fetchDog(dogData);
-        }}
+            console.warn("Something went wrong with mode states!")
+        }
     })
 
     let saveButton = document.getElementById('dogEx');
@@ -106,6 +116,13 @@ async function requestDogData(){
     for (let data in dData){
         dogList.push(JSON.parse(dData[data]));
     }
+}
+
+async function getPinData(){
+    const response = await fetch("/pins")
+    const data = await(await response.blob()).text()
+    console.log(JSON.parse(data)[0]['Pin Location'])
+    //TODO PUSH THESE TO THE MAP
 }
 
 async function fetchDog(dogData) {
@@ -155,6 +172,10 @@ function toggleMode(){
     if(mode == modes.Select){
         mode = modes.Seen;
         document.getElementById('mode').innerHTML = "Mode: SEEN";
+    }
+    else if(mode == modes.Seen){
+        mode = modes.Listing;
+        document.getElementById('mode').innerHTML = "Mode: LISTING";
     }
     else{
         mode = modes.Select;
