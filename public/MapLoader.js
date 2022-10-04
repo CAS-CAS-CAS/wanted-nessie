@@ -6,6 +6,7 @@ const modes  = {
 }
 var mode = 'SELECT';
 var dogList = [];
+var pinLocations = [];
 
 var dogData = {'ID': `${Date.now()}`,'Name': "Nessie", 'Breed' : "Boxer", "Last Seen" : [-12460306.871548783, 3951536.3379208655]
 , "Last Seen Desc" : 'Lounging by the pool', 
@@ -68,7 +69,14 @@ function main(){
             }
         }
         else if(mode==="LISTING"){
-            let pinData = getPinData();
+            if(pinLocations){
+                for(let i in pinLocations){
+                    console.log("HAHAHAHAHAHAH")
+                }
+            }
+
+            //pinData.forEach(map.addLayer(makePinLayer(ol.proj.transform(this, 'EPSG:3857', 'EPSG:4326'))));
+
         }
         else{
             console.warn("Something went wrong with mode states!")
@@ -121,8 +129,8 @@ async function requestDogData(){
 async function getPinData(){
     const response = await fetch("/pins")
     const data = await(await response.blob()).text()
-    console.log(JSON.parse(data)[0]['Pin Location'])
-    //TODO PUSH THESE TO THE MAP
+    pins = JSON.parse(data)[0]['Pin Location']
+    pinLocations = pins
 }
 
 async function fetchDog(dogData) {
