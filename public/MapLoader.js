@@ -70,8 +70,9 @@ function main(){
         }
         else if(mode==="LISTING"){
             if(pinLocations){
+                //TODO: MAKE THIS SAFE
                 for(let i in pinLocations){
-                    console.log("HAHAHAHAHAHAH")
+                    map.addLayer(makePinLayer(ol.proj.transform(pinLocations[i], 'EPSG:3857', 'EPSG:4326')));
                 }
             }
 
