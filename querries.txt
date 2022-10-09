@@ -1,0 +1,16 @@
+GET
+- signposts by location range
+- pets by signposts (all pets where pets.listinigs === signpost)
+- pets belonging to user
+- listings belonging to user 
+
+POST
+- listing 
+- pet
+-(location ? )
+
+UPDATE
+- pet information
+
+DELETE
+- listing
